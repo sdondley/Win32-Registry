@@ -1,0 +1,5 @@
+.precomp/
+/Win32-Registry-Subkeys-*
+*.iml
+*.idea
+

@@ -1,0 +1,6 @@
+use Test;
+use Win32::Registry::Subkeys;
+
+pass "replace me";
+
+done-testing;
