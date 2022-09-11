@@ -16,7 +16,7 @@ my $key = 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths';
 my $hive = 'hkey_crrent_user';
 dies-ok { get-subkeys $hive, $key }, 'dies with bad hive key';
 
-$hive = 'hkey_current_user';
+$hive = 'hkey_local_machine';
 lives-ok { get-subkeys $hive, $key }, 'lives with good hive key';
 
 $hive = 'LOCAL_MACHINE';
