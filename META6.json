@@ -1,21 +1,26 @@
 {
-  "name": "Win32::Registry",
-  "description": "Retrieve subkeys from the Windows registry",
-  "version": "0.0.1",
-  "perl": "6.d",
+  "auth": "zef:sdondley",
   "authors": [
     "Steve Dondley"
   ],
-  "auth": "zef:sdondley",
-  "depends": [],
-  "build-depends": [],
-  "test-depends": [],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Retrieve subkeys from the Windows registry",
+  "license": "Artistic-2.0",
+  "name": "Win32::Registry::Subkeys",
+  "perl": "6.d",
   "provides": {
     "Win32::Registry": "lib/Win32/Registry.rakumod",
     "Win32::Registry::Subkeys": "lib/Win32/Registry/Subkeys.rakumod"
   },
-  "resources": [],
-  "license": "Artistic-2.0",
-  "tags": [],
-  "source-url": "https://github.com/sdondley/Win32-Registry.git"
+  "resources": [
+  ],
+  "source-url": "https://github.com/sdondley/Win32-Registry.git",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.2"
 }

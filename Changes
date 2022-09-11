@@ -2,5 +2,8 @@ Revision history for Win32-Registry-Subkeys
 
 {{$NEXT}}
 
+0.0.2  2022-09-11T11:26:04-04:00
+    - rename module
+
 0.0.1  2022-09-11T11:09:37-04:00
     - Initial version
