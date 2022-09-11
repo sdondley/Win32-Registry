@@ -1,4 +1,6 @@
 Revision history for Win32-Registry-Subkeys
 
 {{$NEXT}}
+
+0.0.1  2022-09-11T11:09:37-04:00
     - Initial version

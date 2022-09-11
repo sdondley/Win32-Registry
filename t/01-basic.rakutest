@@ -1,13 +1,13 @@
 use Test;
 use Win32::Registry::Subkeys;
 
-unless $*DISTRO.is-win {
-    bail-out 'Skipping tests. This module will not pass tests on ' ~
-        'a non-Windows machine. Force install the module ' ~
-        'to skip testing.';
-}
-
 plan 7;
+
+unless $*DISTRO.is-win {
+    skip-rest 'Skipping test. This module will not pass tests on ' ~
+        'a non-Windows machine.';
+    exit;
+}
 
 use-ok 'Win32::Registry';
 use-ok 'Win32::Registry::Subkeys';
