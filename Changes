@@ -2,6 +2,9 @@ Revision history for Win32-Registry
 
 {{$NEXT}}
 
+0.0.4  2022-09-11T12:57:28-04:00
+    - fix text
+
 0.0.3  2022-09-11T12:55:35-04:00
 
     - Initial version
