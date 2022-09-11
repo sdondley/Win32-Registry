@@ -14,7 +14,6 @@ jobs:
       matrix:
         os:
           - windows-latest
-          -
         raku-version:
           - 'latest'
     runs-on: ${{ matrix.os }}
