@@ -13,10 +13,10 @@ sub get-subkeys(Str:D $h, Str:D $k) is export {
             0,
             KEY_QUERY_VALUE,
             $hkey
-                                             );
+    );
 
     if $success != ERROR_SUCCESS {
-        die "Could not open key to $hkey-handle\\$k";
+        die "Could not open key to {get-hkey($h)}\\$k";
     }
 
     $success = RegQueryInfoKeyW($hkey, 0, 0, 0, my int32 $num-subkeys, my int32
