@@ -3,7 +3,7 @@
 NAME
 ====
 
-Win32::Registry::Subkeys - Retrieve subkeys from the Windows registry
+Win32::Registry - Query the Windows registry using the Windows API
 
 SYNOPSIS
 ========
@@ -18,15 +18,14 @@ my @array  = get-subkeys( $hive, $key );
 DESCRIPTION
 ===========
 
-Win32::Registry::Subkeys uses the NativeCall module to execute the WinAPI functions to extract the subkeys below a key in the registry.
+Win32::Registry uses the NativeCall module to execute WinAPI functions to extract information from the registry.
 
-ROUTINES
-========
+SUBMODULES
+==========
 
-get-subkeys(Str:D $hive, Str:D $key)
-------------------------------------
+  * [Win32::Registry::Subkeys](https://github.com/sdondley/Win32-Registry/blob/main/lib/Win32/Registry/Subkeys.rakumod)
 
-Returns an array with each element containing a string representing a subkey within a given `$key` in the registry `$hive`.
+See the documentation for the individual submodules for further details.
 
 AUTHOR
 ======

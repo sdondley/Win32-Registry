@@ -7,9 +7,9 @@
   ],
   "depends": [
   ],
-  "description": "Retrieve subkeys from the Windows registry",
+  "description": "Query the Windows registry using the Windows API",
   "license": "Artistic-2.0",
-  "name": "Win32::Registry::Subkeys",
+  "name": "Win32::Registry",
   "perl": "6.d",
   "provides": {
     "Win32::Registry": "lib/Win32/Registry.rakumod",
