@@ -1,19 +1,20 @@
-NAME
+# NAME
 ====
 
-Win32::Registry::Subkeys - blah blah blah
+Win32::Registry::Subkeys - Retrieve subkeys from the Windows registry
 
 SYNOPSIS
 ========
 
-```raku
-use Win32::Registry::Subkeys;
-```
 
 DESCRIPTION
 ===========
 
-Win32::Registry::Subkeys is ...
+
+FUNCTIONS
+=========
+
+
 
 AUTHOR
 ======
@@ -25,5 +26,6 @@ COPYRIGHT AND LICENSE
 
 Copyright 2022 Steve Dondley
 
-This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+This library is free software; you can redistribute it and/or modify it under
+the Artistic License 2.0.
 

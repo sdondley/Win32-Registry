@@ -1,20 +1,21 @@
 {
-   "authors" : [
-      "Steve Dondley"
-   ],
-   "perl" : "6.d",
-   "depends" : [],
-   "description" : "blah blah blah",
-   "build-depends" : [],
-   "tags" : [],
-   "name" : "Win32::Registry::Subkeys",
-   "provides" : {
-      "Win32::Registry::Subkeys" : "lib/Win32/Registry/Subkeys.rakumod"
-   },
-   "version" : "0.0.1",
-   "resources" : [],
-   "license" : "Artistic-2.0",
-   "source-url" : "https://github.com/sdondley/Win32-Registry-Subkeys.git",
-   "auth" : "zef:sdondley",
-   "test-depends" : []
+  "name": "Win32::Registry::Subkeys",
+  "description": "blah blah blah",
+  "version": "0.0.1",
+  "perl": "6.d",
+  "authors": [
+    "Steve Dondley"
+  ],
+  "auth": "zef:sdondley",
+  "depends": [],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Win32::Registry": "lib/Win32/Registry.rakumod",
+    "Win32::Registry::Subkeys": "lib/Win32/Registry/Subkeys.rakumod"
+  },
+  "resources": [],
+  "license": "Artistic-2.0",
+  "tags": [],
+  "source-url": "https://github.com/sdondley/Win32-Registry-Subkeys.git"
 }

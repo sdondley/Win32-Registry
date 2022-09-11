@@ -1,6 +1,33 @@
 use Test;
 use Win32::Registry::Subkeys;
 
-pass "replace me";
+unless $*DISTRO.is-win {
+    bail-out 'Skipping tests. This module will not pass tests on ' ~
+        'a non-Windows machine. Force install the module ' ~
+        'to skip testing.';
+}
+
+plan 7;
+
+use-ok 'Win32::Registry';
+use-ok 'Win32::Registry::Subkeys';
+
+my $key = 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths';
+my $hive = 'hkey_crrent_user';
+dies-ok { get-subkeys $hive, $key }, 'dies with bad hive key';
+
+$hive = 'hkey_current_user';
+lives-ok { get-subkeys $hive, $key }, 'lives with good hive key';
+
+$hive = 'LOCAL_MACHINE';
+my @sk;
+lives-ok { @sk = get-subkeys $hive, $key; },
+        'lives with partial, capitalized key';
+
+is @sk.so , True, 'returns populated array';
+
+my $bad-key = 'SOFTWARE\Microsoft\Winows\CurrentVersion\App Paths';
+dies-ok { get-subkeys $hive, $bad-key }, 'dies with bad key';
 
 done-testing;
+
