@@ -18,7 +18,7 @@ my %valid-hives = <
     hkey_dyn_data         0x80000006
 >;
 
-sub get-hkey-handle(Str:D $h ) is export {
+sub get-hkey-handle(Str:D $h) is export {
     my $hive = (%valid-hives ~~ rx:i/$h/).orig;
     die "Unrecognized hive: $h" if !$hive;
     return %valid-hives{$hive};
@@ -42,9 +42,9 @@ sub RegGetValueW(int32,
 sub RegOpenKeyExW(int32, WCHARS, int32, int32, int32 is rw)
         is native("Kernel32.dll") returns int32 is export {*};
 
-sub RegQueryInfoKeyW( int32, int32, int32, int32, int32 is rw, int32 is rw,
-                      int32, int32, int32, int32, int32, int32 )
-        returns int32 is native('kernel32') is export { * };
+sub RegQueryInfoKeyW(int32, int32, int32, int32, int32 is rw, int32 is rw,
+                     int32, int32, int32, int32, int32, int32)
+        returns int32 is native('kernel32') is export {*};
 
 sub wstr(Str $str) returns WCHARS is export {
     my $return = CArray[WCHAR].new($str.encode.list);
@@ -60,10 +60,10 @@ multi sub open-key(Int:D $hkey-handle, Str:D $k) is export {
             0,
             KEY_QUERY_VALUE,
             $hkey
-    );
+                                             );
 
     if $success != ERROR_SUCCESS {
-        die "Could not open key to {get-hkey($hkey-handle)}\\$k";
+        die "Could not open key to { get-hkey($hkey-handle) }\\$k";
     }
     return $hkey;
 }
