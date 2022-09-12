@@ -52,6 +52,33 @@ sub wstr(Str $str) returns WCHARS is export {
     return $return;
 }
 
+multi sub open-key(Int:D $hkey-handle, Str:D $k) is export {
+    my int32 $hkey;
+    my $success = RegOpenKeyExW(
+            $hkey-handle,
+            wstr($k),
+            0,
+            KEY_QUERY_VALUE,
+            $hkey
+    );
+
+    if $success != ERROR_SUCCESS {
+        die "Could not open key to {get-hkey($hkey-handle)}\\$k";
+    }
+    return $hkey;
+}
+
+multi sub open-key(Str:D $key) is export {
+    my ($h, $k) = parse-key($key);
+    my $hkey-handle = get-hkey-handle($h);
+    my $hkey = open-key($hkey-handle, $k);
+}
+
+sub parse-key(Str $k) is export {
+    return ($k.split('\\', 2))[0, 1];
+}
+
+
 =begin pod
 
 =head1 NAME
