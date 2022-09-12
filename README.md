@@ -23,6 +23,17 @@ Win32::Registry uses the NativeCall module to execute WinAPI functions to extrac
 Native Call Functions
 =====================
 
+The following Windows API native call functions are currently available:
+
+RegGetValueW(int32, CArray[WCHAR], CArray[WCHAR], int32, int32, CArray[uint16], int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+RegOpenKeyExW(int32, WCHARS, int32, int32, int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
+--------------------------------------------------------------------------------------------------------------
+
+RegQueryInfoKeyW(int32, int32, int32, int32, int32 is rw, int32 is rw, int32, int32, int32, int32, int32, int32) returns int32 is native('kernel32') is export {*};
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ROUTINES
 ========
 
