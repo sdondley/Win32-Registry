@@ -30,6 +30,15 @@ sub get-hkey(Str:D $h) is export {
     return $hive;
 }
 
+sub RegGetValueW(int32,
+                 CArray[WCHAR],
+                 CArray[WCHAR],
+                 int32,
+                 int32,
+                 CArray[uint16],
+                 int32 is rw)
+        is native("Kernel32.dll") returns int32 is export {*};
+
 sub RegOpenKeyExW(int32, WCHARS, int32, int32, int32 is rw)
         is native("Kernel32.dll") returns int32 is export {*};
 
