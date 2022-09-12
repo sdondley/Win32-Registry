@@ -3,24 +3,16 @@ use Win32::Registry;
 
 use NativeCall;
 
+
 sub get-subkeys(Str:D $h, Str:D $k) is export {
     my $hkey-handle = get-hkey-handle($h);
 
-    my int32 $hkey;
-    my $success = RegOpenKeyExW(
-            $hkey-handle,
-            wstr($k),
-            0,
-            KEY_QUERY_VALUE,
-            $hkey
+    my $hkey = open-key($hkey-handle, $k);
+
+    my $success = RegQueryInfoKeyW($hkey, 0, 0, 0,
+        my int32 $num-subkeys, my int32
+        $max-sk-len, 0, 0, 0, 0, 0, 0
     );
-
-    if $success != ERROR_SUCCESS {
-        die "Could not open key to {get-hkey($h)}\\$k";
-    }
-
-    $success = RegQueryInfoKeyW($hkey, 0, 0, 0, my int32 $num-subkeys, my int32
-    $max-sk-len, 0, 0, 0, 0, 0, 0);
 
     my @subkeys;
     for ^$num-subkeys {
