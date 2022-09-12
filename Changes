@@ -1,6 +1,9 @@
 Revision history for Win32-Registry
 
 {{$NEXT}}
+    - document functions
+    - add native call for getting a key's value
+    - code formatting improvements
 
 0.0.4  2022-09-11T12:57:28-04:00
     - fix text
