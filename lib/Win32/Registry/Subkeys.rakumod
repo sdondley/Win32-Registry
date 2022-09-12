@@ -1,8 +1,6 @@
 unit module Win32::Registry::Subkeys;
 use Win32::Registry;
-
 use NativeCall;
-
 
 sub get-subkeys(Str:D $h, Str:D $k) is export {
     my $hkey = open-key(get-hkey-handle($h), $k);
