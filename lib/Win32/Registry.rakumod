@@ -74,7 +74,7 @@ multi sub open-key(Str:D $key) is export {
     my $hkey = open-key($hkey-handle, $k);
 }
 
-sub parse-key(Str $k) is export {
+sub parse-key(Str $k) {
     return ($k.split('\\', 2))[0, 1];
 }
 
