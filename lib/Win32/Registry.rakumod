@@ -103,6 +103,14 @@ WinAPI functions to extract information from the registry.
 
 =head1 Native Call Functions
 
+The following Windows API native call functions are currently available:
+
+=head2 RegGetValueW(int32, CArray[WCHAR], CArray[WCHAR], int32, int32, CArray[uint16], int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
+
+=head2 RegOpenKeyExW(int32, WCHARS, int32, int32, int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
+
+=head2 RegQueryInfoKeyW(int32, int32, int32, int32, int32 is rw, int32 is rw, int32, int32, int32, int32, int32, int32) returns int32 is native('kernel32') is export {*};
+
 =head1 ROUTINES
 
 =head2 get-hkey-handle(Str:D $hive)
