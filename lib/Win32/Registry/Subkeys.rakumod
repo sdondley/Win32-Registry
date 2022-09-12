@@ -5,13 +5,11 @@ use NativeCall;
 
 
 sub get-subkeys(Str:D $h, Str:D $k) is export {
-    my $hkey-handle = get-hkey-handle($h);
-
-    my $hkey = open-key($hkey-handle, $k);
+    my $hkey = open-key(get-hkey-handle($h), $k);
 
     my $success = RegQueryInfoKeyW($hkey, 0, 0, 0,
-        my int32 $num-subkeys, my int32
-        $max-sk-len, 0, 0, 0, 0, 0, 0
+        my int32 $num-subkeys, my int32 $max-sk-len,
+        0, 0, 0, 0, 0, 0
     );
 
     my @subkeys;
@@ -19,23 +17,15 @@ sub get-subkeys(Str:D $h, Str:D $k) is export {
         # the native call function gets placed in the loop to avoid problems:
         # see issue #1719 at https://github.com/MoarVM/MoarVM/issues/1719
         sub RegEnumKeyExW(
-                int32 $hkey,
-                # 1 handle to an open reg. key
-                int32,
-                # 2 the index of the subkey to retrieve
-                CArray[uint16],
-                # 3 pointer to a buffer
-                int32 is rw,
-                # 4 pointer to a variable
-                int32,
-                # 5 unused
-                CArray[int16],
-                # 6 pointer to a buffer, can be null
-                int32,
-                # 7 pointer to a variable, can be null
-                int32
-                # 8 pointer to a file structure, can be null
-                          ) returns int32 is native('kernel32') {*};
+                int32 $hkey, # 1 handle to an open reg. key
+                int32, # 2 the index of the subkey to retrieve
+                CArray[uint16], # 3 pointer to a buffer
+                int32 is rw, # 4 pointer to a variable
+                int32, # 5 unused
+                CArray[int16], # 6 pointer to a buffer, can be null
+                int32, # 7 pointer to a variable, can be null
+                int32 # 8 pointer to a file structure, can be null
+        ) returns int32 is native('kernel32') {*};
 
         my $subkeyname = CArray[uint16].new;
         $subkeyname[$_] = 0 for 0 .. $max-sk-len;
