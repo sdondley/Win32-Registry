@@ -42,6 +42,8 @@ sub RegGetValueW(int32,
 sub RegOpenKeyExW(int32, WCHARS, int32, int32, int32 is rw)
         is native("Kernel32.dll") returns int32 is export {*};
 
+sub RegCloseKey(int32) is native("Kernel32.dll") returns int32 is export {*};
+
 sub RegQueryInfoKeyW(int32, int32, int32, int32, int32 is rw, int32 is rw,
                      int32, int32, int32, int32, int32, int32)
         returns int32 is native('kernel32') is export {*};
@@ -52,7 +54,19 @@ sub wstr(Str $str) returns WCHARS is export {
     return $return;
 }
 
-multi sub open-key(Int:D $hkey-handle, Str:D $k) is export {
+sub close-key(Int:D $key-handle) is export {
+    return !RegCloseKey($key-handle).so;
+}
+
+sub key-exists(Str:D $key) is export {
+    my ($h, $k) = parse-key($key);
+    my $hkey-handle = get-hkey-handle($h);
+    my $hkey = _RegOpenKeyW($hkey-handle, $k);
+    close-key $hkey if $hkey;
+    return $hkey ?? True !! False;
+}
+
+sub _RegOpenKeyW(Int:D $hkey-handle, Str:D $k) {
     my int32 $hkey;
     my $success = RegOpenKeyExW(
             $hkey-handle,
@@ -60,9 +74,14 @@ multi sub open-key(Int:D $hkey-handle, Str:D $k) is export {
             0,
             KEY_QUERY_VALUE,
             $hkey
-                                             );
+    );
+    # $success is 0 when function succeeded
+    return !$success ?? $hkey !! 0;
+}
 
-    if $success != ERROR_SUCCESS {
+multi sub open-key(Int:D $hkey-handle, Str:D $k) is export {
+    my $hkey = _RegOpenKeyW($hkey-handle, $k);
+    if !$hkey {
         die "Could not open key to { get-hkey($hkey-handle) }\\$k";
     }
     return $hkey;
@@ -103,7 +122,9 @@ WinAPI functions to extract information from the registry.
 
 =head1 Native Call Functions
 
-The following Windows API native call functions are currently available:
+The following Windows API native call functions are currently supported:
+
+=head2 RegCloseKey(int32) is native("Kernel32.dll") returns int32 is export {*};
 
 =head2 RegGetValueW(int32, CArray[WCHAR], CArray[WCHAR], int32, int32, CArray[uint16], int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
 
