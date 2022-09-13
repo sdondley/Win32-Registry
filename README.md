@@ -23,7 +23,10 @@ Win32::Registry uses the NativeCall module to execute WinAPI functions to extrac
 Native Call Functions
 =====================
 
-The following Windows API native call functions are currently available:
+The following Windows API native call functions are currently supported:
+
+RegCloseKey(int32) is native("Kernel32.dll") returns int32 is export {*};
+-------------------------------------------------------------------------
 
 RegGetValueW(int32, CArray[WCHAR], CArray[WCHAR], int32, int32, CArray[uint16], int32 is rw) is native("Kernel32.dll") returns int32 is export {*};
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,6 +58,24 @@ Returns the name of a hive, if found. Dies otherwise.
 ```raku
 my $handle = get-hkey('local_machine');
 say $handle; # OUTPUT: hkey_local_machine
+```
+
+key-exists(Str:D $key)
+----------------------
+
+Test to see if a key exists in the registry. Accepts a string representing a path to a registry key. Returns a boolean value.
+
+```raku
+my $exists = key-exists('hkey_local_machine\SOFTWARE\Microsoft\Windows \CurrentVersion \App Paths');
+```
+
+close-key(Int:D $key-handle)
+----------------------------
+
+Closes an open key. Accepts a handle to an already open key. Returns boolean value based on success of operation. False will be returned if the key was already closed.
+
+```raku
+$key-exists = key-exists('hkey_local_machine\SOFTWARE\Microsoft\Windows \CurrentVersion \App Paths');
 ```
 
 wstr(Str $str)
