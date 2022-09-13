@@ -1,7 +1,9 @@
+use lib 'lib';
 use Test;
 use Win32::Registry::Subkeys;
+use Win32::Registry;
 
-plan 7;
+plan 10;
 
 unless $*DISTRO.is-win {
     skip-rest 'Skipping test. This module will not pass tests on ' ~
@@ -25,6 +27,14 @@ lives-ok { @sk = get-subkeys $hive, $key; },
         'lives with partial, capitalized key';
 
 is @sk.so , True, 'returns populated array';
+
+my $test-key = @sk.shift;
+
+$key = open-key($test-key);
+is close-key($key), True, 'closes a known open key';
+is close-key($key), False, 'close returns false on unopen key';
+
+is key-exists($test-key), True, 'detects if key exists';
 
 my $bad-key = 'SOFTWARE\Microsoft\Winows\CurrentVersion\App Paths';
 dies-ok { get-subkeys $hive, $bad-key }, 'dies with bad key';
