@@ -157,6 +157,29 @@ say $handle; # OUTPUT: hkey_local_machine
 
 =end code
 
+=head2 key-exists(Str:D $key)
+
+Test to see if a key exists in the registry. Accepts a string
+representing a path to a registry key. Returns a boolean value.
+
+=begin code :lang<raku>
+
+my $exists = key-exists('hkey_local_machine\SOFTWARE\Microsoft\Windows \CurrentVersion \App Paths');
+
+=end code
+
+=head2 close-key(Int:D $key-handle)
+
+Closes an open key. Accepts a handle to an already open key. Returns boolean
+value based on success of operation. False will be returned if the key
+was already closed.
+
+=begin code :lang<raku>
+
+$key-exists = key-exists('hkey_local_machine\SOFTWARE\Microsoft\Windows \CurrentVersion \App Paths');
+
+=end code
+
 =head2 wstr(Str $str)
 
 Converts a string into a wide characgter string, suitable for passing to a Windows
