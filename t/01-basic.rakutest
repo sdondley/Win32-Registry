@@ -1,4 +1,3 @@
-use lib 'lib';
 use Test;
 use Win32::Registry::Subkeys;
 use Win32::Registry;
